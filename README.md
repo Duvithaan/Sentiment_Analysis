@@ -1,50 +1,55 @@
-News Sentiment Analysis
-This project builds a machine learning model to perform sentiment analysis on financial news headlines using Python libraries like transformers and feedparser. The model is based on pre-trained language models and demonstrates fetching data from an RSS feed, text processing, and sentiment classification.
+# Financial News Sentiment Analysis
 
-Objective
-The objective is to fetch recent financial news headlines for a given stock ticker and keyword, then analyze the sentiment of these headlines to provide an overall sentiment score (positive, negative, or neutral).
+This project performs sentiment analysis on financial news headlines using Python and Hugging Face's Transformers. It fetches news headlines from Yahoo Finance RSS feeds based on a given stock ticker and uses a pretrained model to classify the sentiment of each headline as positive, negative, or neutral.
 
-Technologies Used
-Python
+## Objective
 
-feedparser
+Analyze recent news articles related to a specific stock (e.g., META, AAPL, TSLA) and determine the overall sentiment to assist with investor decision-making.
 
-transformers
+## Technologies Used
 
-torch
+- Python  
+- Feedparser  
+- Transformers (Hugging Face)  
+- Pretrained Model: `distilbert-base-uncased-finetuned-sst-2-english`  
+- Jupyter Notebook  
 
-pandas
+## Data Source
 
-bottleneck
+News headlines are fetched from Yahoo Finance using RSS feeds. The URL is constructed based on the stock ticker provided by the user.
 
-Dataset
-The dataset is a live RSS feed of top financial headlines from Yahoo Finance. The script fetches entries for a specified ticker (e.g., GC=F for Gold Futures) and a keyword (e.g., 'gold').
+## Steps Performed
 
-The data includes:
+### Data Retrieval
+- Parsed RSS feed from Yahoo Finance using `feedparser`
+- Extracted titles, publication dates, and summaries
 
-title – The headline of the news article
+### Preprocessing
+- Filtered articles based on presence of the stock keyword
+- Cleaned and prepared text summaries
 
-link – The URL to the full article
+### Sentiment Analysis
+- Used Hugging Face Transformers pipeline
+- Applied sentiment classification on each news summary
 
-published – The publication date and time
+### Scoring
+- Assigned positive or negative scores based on sentiment
+- Calculated average sentiment score
+- Determined overall sentiment (positive / negative / neutral)
 
-summary – A brief summary of the article
+## Results
 
-Steps Performed
-Environment Setup: Imports necessary libraries and initializes a sentiment analysis pipeline using a pre-trained model like ProsusAI/finbert.
+- Successfully analyzed news sentiment for the given stock
+- Printed sentiment for each relevant article
+- Computed an overall sentiment score across all matched articles
 
-Model Demonstration: A sample sentence is passed to the pipeline to confirm the model's functionality.
+## Files Included
 
-News Feed Parsing: The script fetches news entries from a Yahoo Finance RSS feed for a specified ticker and keyword.
+- `sentiment_analysis.ipynb` – Jupyter Notebook with full implementation
 
-Sentiment Analysis: It iterates through the fetched entries and uses a sentiment analysis model to determine the sentiment (positive or negative) and a corresponding score for each relevant article's summary. The code also mentions using distilbert-base-uncased-finetuned-sst-2-english as a model.
+## Future Work
 
-Score Aggregation: The scores from individual articles are aggregated to calculate a final overall sentiment score.
-
-Overall Sentiment Classification: Based on the final score, the overall sentiment is classified as "positive," "negative," or "neutral". For example, a final score of 0.7481 is classified as "positive".
-
-Results
-The project successfully fetches and analyzes financial news, providing an overall sentiment for a specific asset.
-
-Files Included
-sentiment_analysis.ipynb – Jupyter notebook with the full implementation.
+- Add time-based sentiment trend visualizations
+- Support more NLP models for comparison
+- Export results to CSV or JSON
+- Build a web interface using Streamlit or Flask
